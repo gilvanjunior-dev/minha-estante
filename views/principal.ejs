@@ -1,0 +1,330 @@
+<%- include("partials/header") %>
+
+<section class="library-page">
+
+    <header class="library-header">
+
+        <div>
+            <p class="library-label">MINHA BIBLIOTECA</p>
+
+            <h1>Meus Livros 📚</h1>
+
+            <p>
+                Gerencie sua coleção e acompanhe o andamento das suas leituras.
+            </p>
+        </div>
+
+        <a href="/livros/novo" class="add-book">
+            ＋ Cadastrar livro
+        </a>
+
+    </header>
+
+
+    <% if (livros.length === 0) { %>
+
+        <article class="empty-card">
+
+            <div class="empty-icon">📚</div>
+
+            <h2>Sua estante está vazia</h2>
+
+            <p>
+                Cadastre seu primeiro livro para começar.
+            </p>
+
+            <a href="/livros/novo" class="primary-button">
+                ＋ Cadastrar primeiro livro
+            </a>
+
+        </article>
+
+    <% } else { %>
+
+        <section class="books-grid">
+
+            <% livros.forEach((livro, index) => { %>
+
+                <article class="book-card">
+
+                    <header class="book-top">
+
+                        <div class="book-icon">
+                            📖
+                        </div>
+
+                        <% if (livro.status === "Lido") { %>
+
+                            <span class="status read">
+                                ✓ Lido
+                            </span>
+
+                        <% } else { %>
+
+                            <span class="status reading">
+                                ◷ Lendo
+                            </span>
+
+                        <% } %>
+
+                    </header>
+
+
+                    <section class="book-info">
+
+                        <h2>
+                            <%= livro.titulo %>
+                        </h2>
+
+                        <p class="author">
+                            por <%= livro.autor %>
+                        </p>
+
+                        <p class="pages">
+                            📄 <strong><%= livro.paginas %></strong> páginas
+                        </p>
+
+                    </section>
+
+
+                    <menu class="book-actions">
+
+                        <li>
+
+                            <a
+                                href="/livros/status/<%= index %>"
+                                class="status-button"
+                            >
+                                <% if (livro.status === "Lendo") { %>
+                                    Marcar como Lido
+                                <% } else { %>
+                                    Marcar como Lendo
+                                <% } %>
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a
+                                href="/livros/remover/<%= index %>"
+                                onclick="return confirm('Deseja excluir este livro da sua estante?')"
+                                class="delete-button"
+                            >
+                                🗑
+                            </a>
+
+                        </li>
+
+                    </menu>
+
+                </article>
+
+            <% }) %>
+
+        </section>
+
+    <% } %>
+
+</section>
+
+
+<style>
+
+    .library-page {
+        width: 90%;
+        max-width: 1170px;
+        margin: auto;
+        padding: 55px 0 80px;
+    }
+
+    .library-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+
+    .library-label {
+        color: #1769ed;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    .library-header h1 {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    .library-header p {
+        color: #65728a;
+        font-size: 17px;
+    }
+
+    .add-book {
+        background: #1769ed;
+        color: white;
+        padding: 14px 22px;
+        border-radius: 12px;
+        font-weight: bold;
+        box-shadow: 0 8px 20px rgba(23, 105, 237, .18);
+    }
+
+    .books-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .book-card {
+        background: white;
+        border-radius: 18px;
+        padding: 25px;
+        box-shadow: 0 8px 30px rgba(31, 56, 95, .08);
+        transition: .2s;
+    }
+
+    .book-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(31, 56, 95, .13);
+    }
+
+    .book-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+    }
+
+    .book-icon {
+        font-size: 40px;
+    }
+
+    .status {
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .status.read {
+        background: #e3f7eb;
+        color: #168447;
+    }
+
+    .status.reading {
+        background: #fff4d8;
+        color: #a56b00;
+    }
+
+    .book-info h2 {
+        font-size: 21px;
+        margin-bottom: 8px;
+    }
+
+    .author {
+        color: #68758b;
+        margin-bottom: 20px;
+    }
+
+    .pages {
+        color: #68758b;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .book-actions {
+        display: flex;
+        gap: 10px;
+        list-style: none;
+    }
+
+    .book-actions li:first-child {
+        flex: 1;
+    }
+
+    .status-button {
+        display: block;
+        text-align: center;
+        background: #1769ed;
+        color: white;
+        padding: 11px;
+        border-radius: 9px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .delete-button {
+        display: block;
+        background: #ffe9e9;
+        color: #e34242;
+        padding: 11px 14px;
+        border-radius: 9px;
+    }
+
+    .empty-card {
+        background: white;
+        border-radius: 20px;
+        padding: 70px 30px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(31, 56, 95, .08);
+    }
+
+    .empty-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+    }
+
+    .empty-card h2 {
+        font-size: 27px;
+        margin-bottom: 10px;
+    }
+
+    .empty-card p {
+        color: #68758b;
+        margin-bottom: 25px;
+    }
+
+    .primary-button {
+        display: inline-block;
+        background: #1769ed;
+        color: white;
+        padding: 13px 22px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 900px) {
+
+        .books-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .library-header {
+            display: block;
+        }
+
+        .add-book {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .books-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .library-header h1 {
+            font-size: 32px;
+        }
+
+    }
+
+</style>
+
+<%- include("partials/footer") %>

@@ -1,38 +1,301 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Estante</title>
-</head>
+<%- include("partials/header") %>
 
-<body>
+<section class="hero">
 
-    <header>
-        <h1>Minha Estante</h1>
+    <article class="hero-card">
 
-        <nav>
-            <a href="/">Início</a>
-            <a href="/livros">Meus Livros</a>
-            <a href="/livros/novo">Cadastrar Livro</a>
-        </nav>
-    </header>
+        <div class="badge">
+            📖 &nbsp; BIBLIOTECA PESSOAL
+        </div>
 
-    <main>
-        <article>
-            <h2>Bem-vindo à Minha Estante</h2>
+        <h1>
+            Bem-vindo à
+            <span>Minha Estante</span>
+        </h1>
 
-            <p>
-                Organize seus livros e acompanhe suas leituras.
-            </p>
+        <p>
+            Organize seus livros e acompanhe suas leituras
+            de forma simples e prática.
+        </p>
 
-            <a href="/livros">Acessar minha estante</a>
-        </article>
-    </main>
+        <menu class="hero-buttons">
 
-    <footer>
-        <small>Minha Estante</small>
-    </footer>
+            <li>
+                <a href="/livros" class="btn-primary">
+                    📖 &nbsp; Ver meus livros
+                </a>
+            </li>
 
-</body>
-</html>
+            <li>
+                <a href="/livros/novo" class="btn-secondary">
+                    ＋ &nbsp; Cadastrar livro
+                </a>
+            </li>
+
+        </menu>
+
+    </article>
+
+    <!-- Ilustração decorativa -->
+    <aside class="books-decoration">
+
+        <div class="book book-blue"></div>
+        <div class="book book-red"></div>
+        <div class="book book-dark"></div>
+        <div class="book book-blue-small"></div>
+
+    </aside>
+
+</section>
+
+<style>
+
+    .hero {
+        min-height: calc(100vh - 80px);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+        overflow: hidden;
+
+        padding: 60px 20px;
+
+        background:
+            radial-gradient(
+                circle at 10% 80%,
+                #dce9ff 0,
+                transparent 25%
+            ),
+            radial-gradient(
+                circle at 90% 20%,
+                #e5efff 0,
+                transparent 25%
+            ),
+            #f4f7fc;
+    }
+
+    .hero-card {
+        width: 850px;
+        max-width: 95%;
+
+        background: rgba(255, 255, 255, 0.92);
+
+        border-radius: 20px;
+
+        padding: 55px 50px 65px;
+
+        text-align: center;
+
+        box-shadow:
+            0 20px 60px rgba(31, 56, 95, 0.10);
+
+        position: relative;
+        z-index: 2;
+    }
+
+    .badge {
+        display: inline-block;
+
+        background: #e7f0ff;
+        color: #1769ed;
+
+        padding: 10px 22px;
+
+        border-radius: 30px;
+
+        font-weight: 700;
+        font-size: 15px;
+
+        margin-bottom: 30px;
+    }
+
+    .hero h1 {
+        font-size: 62px;
+        line-height: 1.05;
+
+        margin-bottom: 25px;
+
+        color: #17233d;
+
+        font-weight: 800;
+    }
+
+    .hero h1 span {
+        display: block;
+        color: #1769ed;
+        margin-top: 5px;
+    }
+
+    .hero p {
+        font-size: 22px;
+        line-height: 1.5;
+
+        color: #536079;
+
+        max-width: 650px;
+        margin: 0 auto 40px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 20px;
+
+        list-style: none;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        display: inline-block;
+
+        padding: 17px 32px;
+
+        border-radius: 12px;
+
+        font-size: 18px;
+        font-weight: 700;
+
+        transition: 0.2s;
+    }
+
+    .btn-primary {
+        background: #1769ed;
+        color: white;
+
+        box-shadow: 0 10px 25px rgba(23, 105, 237, 0.25);
+    }
+
+    .btn-primary:hover {
+        background: #0f58ce;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background: white;
+        color: #1769ed;
+
+        border: 2px solid #1769ed;
+    }
+
+    .btn-secondary:hover {
+        background: #edf4ff;
+        transform: translateY(-2px);
+    }
+
+    /* LIVROS DECORATIVOS */
+
+    .books-decoration {
+        position: absolute;
+
+        right: -20px;
+        bottom: 60px;
+
+        width: 220px;
+        height: 250px;
+
+        transform: rotate(-3deg);
+
+        opacity: 0.9;
+    }
+
+    .book {
+        position: absolute;
+
+        width: 190px;
+        height: 45px;
+
+        border-radius: 5px;
+
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .book::after {
+        content: "";
+
+        position: absolute;
+
+        right: 15px;
+        top: 10px;
+
+        width: 100px;
+        height: 25px;
+
+        background: rgba(255,255,255,0.35);
+
+        border-radius: 3px;
+    }
+
+    .book-blue {
+        bottom: 20px;
+        right: 0;
+        background: #2775d8;
+    }
+
+    .book-red {
+        bottom: 65px;
+        right: 20px;
+        background: #e47777;
+        transform: rotate(3deg);
+    }
+
+    .book-dark {
+        bottom: 110px;
+        right: 5px;
+        background: #25456e;
+        transform: rotate(-2deg);
+    }
+
+    .book-blue-small {
+        bottom: 155px;
+        right: 25px;
+        background: #5a9aeb;
+        transform: rotate(2deg);
+    }
+
+    @media (max-width: 900px) {
+
+        .hero h1 {
+            font-size: 48px;
+        }
+
+        .books-decoration {
+            opacity: 0.15;
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        .hero {
+            padding: 30px 15px;
+        }
+
+        .hero-card {
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+        }
+
+        .hero-buttons li,
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+        }
+    }
+
+</style>
+
+<%- include("partials/footer") %>
